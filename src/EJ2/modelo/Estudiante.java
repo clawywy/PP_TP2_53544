@@ -1,0 +1,26 @@
+package EJ2.modelo;
+
+import java.io.Serializable;
+
+public class Estudiante implements Serializable {
+        private String legajo;
+        private String nombre;
+
+        public Estudiante(String legajo, String nombre) {
+            this.legajo = legajo;
+            this.nombre = nombre;
+        }
+
+        public String getLegajo() {
+            return legajo;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public String toString() {
+            return "Estudiante:" + nombre + "(Legajo:" + legajo + ")";
+        }
+    }
+
