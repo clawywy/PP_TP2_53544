@@ -177,32 +177,57 @@ public class App {
 
         System.out.println("\n\nRESUMEN FINAL DEL EVENTO");
         evento.mostrarDatos();
-        // =========================================================================
-        // EJERCICIO 3: FILTRADO GENÉRICO Y CÁLCULO DE COSTOS CON WILDCARDS
-        // =========================================================================
         System.out.println("   EJERCICIO 3: FILTRADO POR TIPO Y COSTO DE MATERIALES");
 
 
-        // d y g. Filtrado devolviendo listas fuertemente tipadas
         List<Charla> charlas = evento.filtrarActividadesPorTipo(Charla.class);
         List<Taller> talleres = evento.filtrarActividadesPorTipo(Taller.class);
         List<Curso> cursos = evento.filtrarActividadesPorTipo(Curso.class);
 
-        // e. Cantidad de actividades de cada tipo
         System.out.println("\n--- CANTIDAD DE ACTIVIDADES POR TIPO ---");
         System.out.println("Total de Charlas creadas: " + charlas.size());
         System.out.println("Total de Talleres creados: " + talleres.size());
         System.out.println("Total de Cursos creados: " + cursos.size());
 
-        // f. Cálculo de costo de materiales por tipo usando el wildcard (? extends Actividad)
         System.out.println("\n--- COSTO DE MATERIALES POR TIPO DE ACTIVIDAD ---");
         System.out.println("Costo materiales Charlas: $" + evento.calcularCostoMateriales(charlas));
         System.out.println("Costo materiales Talleres: $" + evento.calcularCostoMateriales(talleres));
         System.out.println("Costo materiales Cursos:   $" + evento.calcularCostoMateriales(cursos));
 
-        // Costo acumulado de todas las actividades del evento
         double costoTotalMateriales = evento.calcularCostoMateriales(evento.getActividades());
         System.out.println("Costo total de materiales del evento: $" + costoTotalMateriales);
+// g. EVIDENCIA DE LISTAS FUERTEMENTE TIPADAS (MÉTODOS EXCLUSIVOS)
+        System.out.println("   EVIDENCIA DE LISTAS FUERTEMENTE TIPADAS (INCISO G)  ");
+
+        System.out.println("\n[List<Charla>] - Acceso a getDisertante():");
+        if (charlas.isEmpty()) {
+            System.out.println(" - No se registraron charlas en este evento.");
+        } else {
+            for (Charla ch : charlas) {
+                // getDisertante() es exclusivo de Charla (no existe en Actividad)
+                System.out.println(" • " + ch.getTitulo() + " | Disertante a cargo: " + ch.getDisertante());
+            }
+        }
+
+        System.out.println("\n[List<Taller>] - Acceso a isRequiereNotebook():");
+        if (talleres.isEmpty()) {
+            System.out.println(" - No se registraron talleres en este evento.");
+        } else {
+            for (Taller t : talleres) {
+                // isRequiereNotebook() es exclusivo de Taller
+                System.out.println(" • " + t.getTitulo() + " | ¿Requiere notebook?: " + (t.isRequiereNotebook() ? "Sí" : "No"));
+            }
+        }
+
+        System.out.println("\n[List<Curso>] - Acceso a getNivel():");
+        if (cursos.isEmpty()) {
+            System.out.println(" - No se registraron cursos en este evento.");
+        } else {
+            for (Curso cu : cursos) {
+                // getNivel() es exclusivo de Curso
+                System.out.println(" • " + cu.getTitulo() + " | Nivel académico: " + cu.getNivel());
+            }
+        }
 
 
         teclado.close();
